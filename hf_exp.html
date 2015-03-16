@@ -1,0 +1,333 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>The experiment</title>
+		
+		<script src="js/jquery.js"></script>
+		<script src="js/whichbro.js" defer></script>
+		
+		<script src="lib/jspsych/jspsych.js"></script>
+		
+		<script src="lib/jspsych/plugins/jspsych-text.js"></script>
+		<script src="lib/jspsych/plugins/jspsych-wd-typing.js"></script>
+		<script src="lib/jspsych/plugins/jspsych-img-typing.js"></script>
+		<script src="lib/jspsych/plugins/jspsych-stroop.js"></script>
+		
+		<link href="lib/jspsych/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+
+	</head>
+	
+	<body>
+	
+	</body>
+
+	<script> 
+
+		var subjectID =  'ID' + new Date().valueOf();
+
+		/* define welcome message block */
+		var welcome_block = {
+		  type: "text",
+		  text: "Welcome on board ! Appuyer sur une touche pour commencer."
+		};
+
+		/* define instruction blocks */
+		var word_instruct_block = {
+		  type: "text",
+		  text: "<p class='large'>Phase 1 sur 3 : copie de mots</p>"+
+				"<p>Consigne : recopier le mot présenté à l'écran puis "+
+				"appuyer sur la touche Entrée pour valider.</p><br />" +
+				"<p class='large'>Exemple :</p>" +
+				"<p class='exemple_text'>lapin</p>" +
+				"<p>Il faudra saisir (en minuscule) : <kbd>L</kbd> + <kbd>A</kbd> + <kbd>P</kbd> + <kbd>I</kbd> + <kbd>N</kbd> + <kbd>Entrée</kbd> </p>" +
+				"<p>Une vingtaine de mots vous sera ainsi présenter.</p><br />" +
+				"<p>(Copier directement le mot, inutile d'utiliser la souris)</p><br />" +
+				"<p>Appuyez sur une touche pour commencer...</p>",
+		  timing_post_trial: 2000
+		};
+		var img_instruct_block = {
+		  type: "text",
+		  text: "<p class='large'>Phase 2 sur 3 : dénommination d'images</p>" +
+			  "<p>Enter le nom associé à l'objet présenté sur l'image,</p>" +
+			  "<p>appuyer sur la touche Entrée pour valider votre réponse.</p><br />" +
+			  "<p class='large'>Exemple :</p>" +
+			  "<div><img src='img/exemple_table.jpg' width=100px></img></div>" +
+			  "<p>Pour cette image, il faudra écrire le mot table en minuscule puis appuyer"+
+			  " sur Entrée pour valider :</p>" +
+			  "<p><kbd>T</kbd> + <kbd>A</kbd> + <kbd>B</kbd> + <kbd>L</kbd> + <kbd>E</kbd> + <kbd>Entrée</kbd> </p><br />" +
+			  "<p>Appuyez sur une touche pour commencer...</p>",
+		  timing_post_trial: 2000
+		};
+		
+		var stroop_instruct_block = {
+		  type: "text",
+		  text: "<p class='large'>Phase 3 sur 3 : rapidité</p><p>Identifier le plus rapidement possible" +
+			  "la couleur du mot présenté à l'écran.</p>" +
+			  "<p>Appuyer sur la touche <kbd>R</kbd> si le mot est rouge,</p>" +
+			  "<p>ou sur la touche <kbd>B</kbd> si le mot est bleu.</p><br />" +
+			  "<p class='large'>Exemple :</p>" +
+			  "<p><span class='red'>Vert</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Réponse attendue : <kbd>R</kbd> (inutile de valider par Entrée)</p>" +
+			  "<p><span class='blue'>Jaune</span>&nbsp;&nbsp;&nbsp; Réponse attendue : <kbd>B</kbd></p><br />" +
+			  "<p>Appuyez sur une touche pour commencer...</p>",
+		  timing_post_trial: 2000
+		};
+		
+		var merci_block = {
+			type: "text",
+			text : "Merci de votre participation !"
+		};
+		
+	   /* define stimulus blocks*/
+		var word_stimuli = ['lapin', 'sapin']; //, 'palmier', 'sable', 'montagne'];
+		var word_trials = jsPsych.randomization.repeat(word_stimuli, 1, 0);
+
+		var word_stim_block = {
+		  type: "wd-typing",
+		  stimuli: word_trials,
+		  validresp: 13, // Key to valid response (13 = Enter)
+		  timing_stim: 10000,
+		  timing_response: 10000
+		};
+
+
+		var img_stimuli = ['autruche','tomate','cheval','citron']; //,'fraise','marteau','pigeon','pomme','poule','requin','serpent','tigre','banane','tortue','vache'];
+		
+		var img_stim_word = jsPsych.randomization.repeat(img_stimuli, 1, 0);
+		var imgdir = 'img/exp'; 
+		var imgform = 'jpg';
+		var img_paths = [];
+		for (var i = 0 ; i < img_stimuli.length ; i++) {
+			img_paths[i] = imgdir + '/' + img_stim_word[i] + '.' + imgform ;
+		}
+	  
+		var img_stim_block = {
+		  type: "img-typing",
+		  img_names: img_stim_word,
+		  img_paths: img_paths,
+		  validresp: 13, // Key to valid response (13 = Enter)
+		  timing_stim: 10000,
+		  timing_response: 10000,
+		  is_html: false
+		};
+		
+		var stroop_stimuli = {
+			word: ['Rouge', 'Vert', 'Bleu', 'Orange'], //, 'Violet' ,'Jaune'
+			color: ['rouge', 'bleu'],
+			congruent: [0]
+		}; 
+		var stroop_trials = jsPsych.randomization.factorial(stroop_stimuli, 1, 1); //2, 1);
+		for (var i = 0; i < stroop_trials.word.length; i++) {
+			if (stroop_trials.word[i].toLowerCase() === stroop_trials.color[i]){
+				   stroop_trials.congruent[i] = 1;
+		   };
+		};
+				
+		var stroop_stim_block = {
+		type: "stroop",
+		stimuli: stroop_trials,
+		choices: ['r','b'],
+		timing_stim: [2000],
+		timing_response: [2000]
+		};
+		
+		function strdata2array(strdata){
+			/* Remove brackets before spliting*/
+			
+			strdata = strdata.substring(1, strdata.length - 1);
+
+			var spstr = strdata.split(",");
+			
+			var numArray = [];
+			var k = 0;
+			
+			for (var i = 0; i < spstr.length ; i++) {
+				numArray[k] = parseInt(spstr[i]);
+				k++;
+			}
+			
+			return numArray;
+		};
+		
+		/* define debrief block */
+
+		function getStroopAvgRT() {
+		
+			var trials = jsPsych.data.getTrialsOfType('stroop');
+		
+			/*Average response time for congruent trials with valid responses*/
+			var cgt_sum_rt = 0;
+			var cgt_count = 0;
+			for (var i = 0; i < trials.length; i++) {
+				if (trials[i].congruent == 1 && trials[i].valid == 1 && trials[i].rt > -1) {
+				cgt_sum_rt += trials[i].rt;
+				cgt_count++;
+				}
+			}
+			var cgt_avg_rt = Math.floor(cgt_sum_rt / cgt_count);
+			
+			/*Average response time for incongruent trials with valid responses*/
+			var icgt_sum_rt = 0;
+			var icgt_count = 0;
+			for (var i = 0; i < trials.length; i++) {
+				if (trials[i].congruent == 0 && trials[i].valid == 1 && trials[i].rt > -1) {
+					icgt_sum_rt += trials[i].rt;
+					icgt_count++;
+				}
+			}
+			var icgt_avg_rt = Math.floor(icgt_sum_rt / icgt_count);
+
+			/*Percent of valid responses for congruent & incongruent trials*/
+
+			var cgt_total = 0;
+			var cgt_valid = 0;
+			var icgt_valid = 0;
+			for (var i = 0 ; i < trials.length; i++){
+				cgt_total += trials[i].congruent;
+				if (trials[i].congruent===1){
+					cgt_valid += trials[i].valid;
+				}else{
+					icgt_valid += trials[i].valid;
+				};
+			};
+			
+			var cgt_valid_perc = cgt_valid / cgt_total;
+			var icgt_total = trials.length - cgt_total;
+			if (icgt_total === 0){
+				var icgt_valid_perc = 1;
+			}else{
+				var icgt_valid_perc = icgt_valid / icgt_total;
+			};
+			
+			return {cgt_avg_rt: cgt_avg_rt, icgt_avg_rt: icgt_avg_rt, cgt_valid_perc: cgt_valid_perc, icgt_valid_perc: icgt_valid_perc};
+		};
+
+		function getTypingAvgT(ttype) {
+		
+			var trials = jsPsych.data.getTrialsOfType(ttype);
+		
+			/*Average response time for typing - only for valid responses*/
+			var sum_tt = 0;
+			var count = 0;
+			var valcount = 0;
+			
+			for (var i = 0; i < trials.length; i++) {
+				if(trials[i].valid > 0){
+					valcount = valcount + 1;
+					/*Typing time are return as string array by jsPsych.data.getTrialsOfType */
+					var vtt = strdata2array(trials[i].typt);
+
+					for (var j = 0; j < vtt.length; j++) {
+						if (vtt[j] > 0) {
+							sum_tt = sum_tt + vtt[j];
+							count = count + 1;
+						}
+					}
+				}	
+			}
+			
+			var avg_tt = Math.floor(sum_tt / count);
+			var valid_perc = valcount / trials.length;
+			
+			return {avg_tt: avg_tt, valid_perc: valid_perc};
+		};
+		
+		var stroop_debrief_block = {
+		  type: "text",
+		  text: function() {
+			var debf = getStroopAvgRT();
+			return "<p>Essais congruents : </p>" +
+			"<p> Temps de réponse moyen = <strong>"+debf.cgt_avg_rt + " ms </strong></p>"+
+			"<p> Pourcentage de réponses correctes = <strong>" + Math.round(debf.cgt_valid_perc*100) + " % </strong></p>"+
+			"<p>Essais incongruents : </p>" +
+			"<p> Temps de réponse moyen = <strong>"+debf.icgt_avg_rt + " ms </strong></p>"+
+			"<p> Pourcentage de réponses correctes = <strong>" + Math.round(debf.icgt_valid_perc*100) + " % </strong></p>"+
+			"<p>Appuyer sur une touche pour en finir !...</p>";
+		  }
+		};
+
+		var wd_typing_debrief_block = {
+		  type: "text",
+		  text: function() {
+			debf = getTypingAvgT('wd-typing');
+			return "<p>Vitesse de frappe moyenne : </p>" +
+			"<p><strong> "+ debf.avg_tt + " ms par caractère</strong></p>"+
+			"<p>Soit <strong> "+ Math.round(60000 / debf.avg_tt) + " caractères par minute</strong></p>"+
+			"<p>Pourcentage de mots frappés sans faute :  <strong> "+ Math.round(debf.valid_perc*100) + " %</strong></p>" +
+			"<p>Appuyer sur une touche pour continuer...</p>";
+		  }
+		};
+		var img_typing_debrief_block = {
+		  type: "text",
+		  text: function() {
+			debf = getTypingAvgT('img-typing');
+			return "<p>Vitesse de frappe moyenne : </p>" +
+			"<p><strong> "+ debf.avg_tt + " ms par caractère</strong></p>"+
+			"<p>Soit <strong> "+ Math.round(60000 / debf.avg_tt) + " caractères par minute</strong></p>"+
+			"<p>Pourcentage de mots frappés sans faute :  <strong> "+ Math.round(debf.valid_perc*100) + " %</strong></p>" +
+			"<p>Appuyer sur une touche pour continuer...</p>";
+		  }
+		};	
+		
+		// Function for writing the data in mysql database
+		function save_data(data, subjinfo){
+
+		   $.ajax({
+			  type:'post',
+			  cache: false,
+			  url: 'db/db_save.php', 
+			  data: {
+				 subjid: subjectID,
+				 subjinfo: subjinfo,
+				 json: JSON.stringify(data)
+				},
+			  success: function(output) { console.log(output); } // write the result to javascript console
+		   });
+		}
+
+		/* create experiment definition array */
+		var experiment = [];
+		experiment.push(welcome_block);
+		
+		//experiment.push(word_instruct_block);
+		experiment.push(word_stim_block);
+		experiment.push(wd_typing_debrief_block);
+
+	/*	experiment.push(img_instruct_block);
+		experiment.push(img_stim_block);
+		experiment.push(img_typing_debrief_block); 
+	  
+		experiment.push(stroop_instruct_block);
+		experiment.push(stroop_stim_block);
+		experiment.push(stroop_debrief_block);
+		
+		experiment.push(merci_block);*/
+		
+		/* start the experiment */
+		jsPsych.init({
+			experiment_structure: experiment,
+			on_finish: function(){ 	  
+				//jsPsych.data.displayData(); 
+				
+				// Save all the data in the database
+				
+				// Adding user's browser and OS infos (as a unique string)
+				Browsers = new WhichBrowser();
+				var subjinfo = "";
+				subjinfo += 'OS_' + Browsers.os.name;
+				if (Browsers.os.version != null) {
+					subjinfo += '_' + Browsers.os.version;
+				}
+				subjinfo += ';Navigator_' + Browsers.browser.name+'_'+ Browsers.browser.version.original;
+				subjinfo += ';Devicetype_'+ Browsers.device.type;
+				
+				// All jsPsych data
+				var alldata = jsPsych.data.getData();	
+				
+				// Save 				
+				save_data(alldata, subjinfo); 
+			}	
+		});	
+	</script> 
+
+</html>

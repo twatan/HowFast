@@ -1,0 +1,380 @@
+/* 
+ * CSS for jsPsych experiments.
+ *
+ * This stylesheet provides minimal styling to make jsPsych 
+ * experiments look polished without any additional styles.
+ *
+ */
+
+/*
+ *
+ * fonts and type
+ *
+ */
+ 
+@import url(//fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700);
+
+html {
+ font-family: 'Open Sans', 'Arial', sans-serif;
+ font-size: 16px;
+ line-height: 1.2em;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+p {
+    clear:both;
+}
+
+.very-small {
+    font-size: 50%;
+}
+
+.small {
+    font-size: 75%;
+}
+
+.large {
+    font-size: 125%;
+}
+
+.very-large {
+    font-size: 150%;
+}
+
+/*
+ *
+ * Classes for changing location of things
+ *
+ */
+ 
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.center-content {
+    text-align: center;
+}
+
+.exemple_text {
+    margin-left: 5em;	
+	font-size: 125%;
+}
+
+.exemple_image {
+	max-width: 20px;
+    margin-left: 5em;	
+}
+
+
+.red {
+    color: red;
+	margin-left: 5em;	
+	font-size: 125%;
+}
+
+.blue {
+    color: blue;
+	margin-left: 5em;	
+	font-size: 125%;
+}
+/*
+ *
+ * Form elements like input fields and buttons
+ *
+ */
+
+input[type="text"] {
+    font-family: 'Open Sans', 'Arial', sans-sefif;
+    font-size: 14px;
+}
+
+button {
+    padding: 0.5em;
+    background-color: #eaeaea;
+    border: 1px solid #eaeaea;
+    color: #333;
+    font-family: 'Open Sans', 'Arial', sans-serif;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button:hover {
+    border:1px solid #ccc;
+}
+
+/*
+ *
+ * Container holding jsPsych content
+ *
+ */
+
+
+.jspsych-display-element {
+    width: 800px;
+    margin: 50px auto 50px auto;
+}
+
+/*
+ *
+ * jsPsych progress bar
+ *
+ */
+
+#jspsych-progressbar-container {
+	color: #777;
+	border-bottom: 2px solid #dedede;
+	background-color: #f3f3f3;
+	margin-bottom: 1em;
+	text-align: center;
+	padding: 10px 0px;
+}
+
+#jspsych-progressbar-container s {
+	
+}
+
+#jspsych-progressbar-outer {
+	background-color: #dedede;
+	border-radius: 5px;
+	padding: 1px;
+	width: 800px;
+	margin: auto;
+}
+
+#jspsych-progressbar-inner {
+	background-color: #aaa; /* #3EB3D7; */
+	width: 0%;
+	height: 1em;
+	border-radius: 5px;
+}
+
+/*
+ *
+ * PLUGIN: jspsych-animation
+ *
+ */
+
+#jspsych-animation-image {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*
+ *
+ * PLUGIN: jspsych-categorize-animation
+ *
+ */
+
+#jspsych-categorize-animation-stimulus {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*
+ *
+ * PLUGIN: jspsych-categorize
+ *
+ */
+
+#jspsych-categorize-stimulus {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.feedback {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*
+ *
+ * PLUGIN: jspsych-free-sort
+ *
+ */
+
+#jspsych-free-sort-arena {
+    margin-left: auto;
+    margin-right: auto;
+    border: 2px solid #444;
+}
+
+/*
+ *
+ * PLUGIN: jspsych-palmer
+ *
+ */
+
+#jspsych-palmer-raphaelCanvas {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*
+ *
+ * PLUGIN: jspsych-same-different
+ *
+ */
+ 
+.jspsych-same-different-stimulus {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*
+ *
+ * PLUGIN: jspsych-single-stim
+ *
+ */
+ 
+#jspsych-single-stim-stimulus {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*
+ *
+ * PLUGIN: jspsych-typing
+ *
+ */
+ 
+#jspsych-typing-stimulus {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+	text-align: center;
+	/*color: red;*/
+}
+
+#jspsych-typing-response {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+	vertical-align: bottom;
+	text-align: center;
+	color: red;
+}
+
+
+
+/*
+ *
+ * PLUGIN: jspsych-stroop
+ *
+ */
+ 
+#jspsych-stroop-bleu {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+	text-align: center;
+	vertical-align: center;
+	color: blue;
+	font-size: 22px;
+}
+
+#jspsych-stroop-rouge {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+	text-align: center;
+	vertical-align: center;
+	color: red;
+	font-size: 22px;
+}
+
+/*
+ *
+ * PLUGIN: jspsych-xab
+ *
+ */
+ 
+.jspsych-xab-stimulus {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*
+ *
+ * PLUGIN: jspsych-survey-text
+ *
+ */
+ 
+ .jspsych-survey-text {
+     margin: 0.25em 0em;
+ }
+ 
+ .jspsych-survey-text-question {
+     margin: 2em 0em;
+ }
+
+ 
+ /**
+ * KEYS.css
+ *
+ * A simple stylesheet for rendering beautiful keyboard-style elements.
+ *
+ * Author:  Michael Hüneburg
+ * Website: http://michaelhue.com/keyscss
+ * License: MIT License (see LICENSE.txt)
+ */
+
+/* Base style, essential for every key. */
+kbd, .key {
+	display: inline;
+	display: inline-block;
+	min-width: 1em;
+	padding: .2em .3em;
+	font: normal .85em/1 "Lucida Grande", Lucida, Arial, sans-serif;
+	text-align: center;
+	text-decoration: none;
+	-moz-border-radius: .3em;
+	-webkit-border-radius: .3em;
+	border-radius: .3em;
+	border: none;
+	cursor: default;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	user-select: none;
+}
+kbd[title], .key[title] {
+	cursor: help;
+}
+
+/* Dark style for display on light background. This is the default style. */
+kbd, kbd.dark, .dark-keys kbd, .key, .key.dark, .dark-keys .key {
+	background: rgb(80, 80, 80);
+	background: -moz-linear-gradient(top, rgb(60, 60, 60), rgb(80, 80, 80));
+	background: -webkit-gradient(linear, left top, left bottom, from(rgb(60, 60, 60)), to(rgb(80, 80, 80)));
+	color: rgb(250, 250, 250);
+	text-shadow: -1px -1px 0 rgb(70, 70, 70);
+	-moz-box-shadow: inset 0 0 1px rgb(150, 150, 150), inset 0 -.05em .4em rgb(80, 80, 80), 0 .1em 0 rgb(30, 30, 30), 0 .1em .1em rgba(0, 0, 0, .3);
+	-webkit-box-shadow: inset 0 0 1px rgb(150, 150, 150), inset 0 -.05em .4em rgb(80, 80, 80), 0 .1em 0 rgb(30, 30, 30), 0 .1em .1em rgba(0, 0, 0, .3);
+	box-shadow: inset 0 0 1px rgb(150, 150, 150), inset 0 -.05em .4em rgb(80, 80, 80), 0 .1em 0 rgb(30, 30, 30), 0 .1em .1em rgba(0, 0, 0, .3);
+}
+
+/* Light style for display on dark background. */
+kbd.light, .light-keys kbd, .key.light, .light-keys .key {
+	background: rgb(250, 250, 250);
+	background: -moz-linear-gradient(top, rgb(210, 210, 210), rgb(255, 255, 255));
+	background: -webkit-gradient(linear, left top, left bottom, from(rgb(210, 210, 210)), to(rgb(255, 255, 255)));
+	color:  rgb(50, 50, 50);
+	text-shadow: 0 0 2px rgb(255, 255, 255);
+	-moz-box-shadow: inset 0 0 1px rgb(255, 255, 255), inset 0 0 .4em rgb(200, 200, 200), 0 .1em 0 rgb(130, 130, 130), 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9);
+	-webkit-box-shadow: inset 0 0 1px rgb(255, 255, 255), inset 0 0 .4em rgb(200, 200, 200), 0 .1em 0 rgb(130, 130, 130), 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9);
+	box-shadow: inset 0 0 1px rgb(255, 255, 255), inset 0 0 .4em rgb(200, 200, 200), 0 .1em 0 rgb(130, 130, 130), 0 .11em 0 rgba(0, 0, 0, .4), 0 .1em .11em rgba(0, 0, 0, .9);
+}

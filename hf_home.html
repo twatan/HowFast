@@ -1,0 +1,111 @@
+<!DOCTYPE html>   
+<html>   
+	<head>  
+		<meta charset="utf-8" />
+		
+		<title>How Fast</title>
+		
+		<link rel="stylesheet" href="css/hf_home.css" />
+		<link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700' rel='stylesheet' type='text/css'>
+		<script src="js/wurfl.js"></script>
+		
+		<!-- Open online experiment in a full screen (S. Mathôt) cogsci.nl -->
+		<script>
+			function openfullscreen(url) {
+				newwin = window.open("", "", "scrollbars")
+				newwin.moveTo(0, 0)
+				newwin.resizeTo(screen.width, screen.height)
+				newwin.location = url
+			}
+		</script>
+		
+	</head>
+	
+	<body>
+
+		<section class="logo-area">	
+			<!-- 	<div class="logo"> </div> -->
+			<div class="logo"> </div>
+				 <div id="catch"><!--<p>Quelle est votre rapidité de frappe au clavier ?</p> -->
+					<p>Participez à notre étude scientifique en ligne</p>
+				</div>
+					
+		</section>
+			
+		<section class="info-area">
+			<div class="info-col"> 
+				<p class="info-title shabox">Pourquoi ?</p> 
+				<p>Les claviers sont devenus omniprésents dans notre vie quotidienne. 
+					Cette expérience est destinée à mesurer la performance de frappe au clavier.
+					Les résultats de cette étude permettront de concevoir un test standardisé, capable d'évaluer le niveau d'expertise d'écriture au clavier.
+					</p>
+			</div>
+		
+			<div class="info-col"> 
+				<p class="info-title shabox">Comment ?</p>
+				<p>Cette expérience vous prendra 5 minutes. Elle se compose de trois parties (frappe de mots et	test de rapidité). 
+					Nous vous demanderons quelques informations générales au préalable (type de clavier, niveau d'étude). 
+					Elles nous seront utiles pour classer l'ensemble des résultats de l'étude. 
+					<span class="important">Les données collectées tout au long de cette expérience sont totalement anonymes.</span>
+				</p>
+			</div>
+			
+			<div class="info-col">
+				<p class="info-title shabox">Qui sommes-nous ?</p> 
+				<p>Cette étude est réalisée sous l'initiative de chercheurs de l'<a target="_blank" href="http://www.univ-amu.fr/">Université d'Aix-Marseille</a>. Elle est le fruit 
+				d'une collaboration entre le <a target="_blank" href="http://gsite.univ-provence.fr/gsite/document.php?pagendx=1031&project=lpc">Laboratoire de Psychologie Cognitive</a> 
+				et le <a target="_blank" href="http://sites.univ-provence.fr/lnc/">Laboratoire de Neurosciences Cognitives</a>,
+				et a bénificié du soutien du <a target="_blank" href="#">Centre de Ressources expérimentales</a> du <a target="_blank" href="http://www.blri.fr/">Brain and Language Research Institute</a>. </p>
+			</div>
+
+			<div class="cf"></div>
+		</section>
+		<section class="start-area">
+			<div id="contact" class="shabox"><p>Des questions ?<br>Suivre l'avancée de l'étude ?<br>Contactez nous !<br>howfastproject (at) univ-amu.fr</p></div> 
+			<div id="start">
+			<div class="start-ok">
+				<p>
+				 </p>
+				<a id="startlink" class="start-ok" href="#" onclick="openfullscreen('hf_exp.html'); return false;"><div id="startkey"></div></a>
+			</div>
+
+		</section>
+			
+		<footer>
+			<!--- <div id="count">
+				<p>Nombre de participants</p>
+			</div>-->
+			<!-- <div class="logo2"> </div> -->
+			<div id="banlogo">
+				<a target="_blank" href="http://www.univ-amu.fr/">
+					<img class="instlogo" src="img/layout/logo_amu.png" alt="Logo AMU" title="Vers le site d'Aix-Marseille Université" /></a>
+				<a target="_blank" href="http://www.cnrs.fr/">
+					<img class="instlogo" src="img/layout/logo_cnrs.png" alt="Logo CNRS" title="Vers le site du CNRS" /></a>
+				<a target="_blank" href="http://sites.univ-provence.fr/lnc/">
+					<img class="instlogo" src="img/layout/logo_lnc.png" alt="Logo LNC" title="Vers le site du Laboratoire de Neurosciences Cognitives" /></a>
+				<a target="_blank" href="http://gsite.univ-provence.fr/gsite/document.php?pagendx=1031&project=lpc">
+					<img class="instlogo" src="img/layout/logo_lpc.png" alt="Logo LPC" title="Vers le site du Laboratoire de Psychologie Cognitive" /></a>
+				<a target="_blank" href="http://www.blri.fr/">
+					<img class="instlogo" src="img/layout/logo_blri.png" alt="Logo BLRI" title="Vers le site du Brain & Language Research Institute" /></a>
+				<a target="_blank" href="http://docs.jspsych.org/">
+					<img class="instlogo" src="img/layout/logo_jspsych.jpg" alt="Logo jsPsych" title="Vers le site de jsPsych" /></a>
+			</div>
+
+		</footer>
+				
+	</body>
+	
+	<script>
+	// Interdire l'acces si c'est une tablette/smartphone
+		document.documentElement.className += ' ' + (WURFL.is_mobile ? '' : 'no-') + "mobile";
+		if ( WURFL.is_mobile == true ) { //true
+			var pmob = document.createElement('p');
+			pmob.id = 'forbidden-access';
+			document.getElementById('start').appendChild(pmob);
+			var txtmob = document.createTextNode("Cette expérience n'est accessible qu'aux utilisateurs de clavier mécanique (et non tactile).");
+			pmob.appendChild(txtmob);
+		}
+	
+	</script>
+
+</html>
